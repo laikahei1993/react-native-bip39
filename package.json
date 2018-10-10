@@ -7,14 +7,14 @@
     "standard": "standard"
   },
   "author": "Alberto Dallaporta",
-  "contributors": [
-  ],
+  "contributors": [],
   "repository": {
     "type": "git",
     "url": "https://github.com/39otrebla/react-native-bip39"
   },
   "license": "MIT",
   "dependencies": {
+    "assert": "^1.4.1",
     "create-hash": "^1.1.0",
     "react-native-crypto": "^2.0.1",
     "react-native-randombytes": "^2.2.0",
