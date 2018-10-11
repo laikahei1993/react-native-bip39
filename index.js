@@ -6,17 +6,17 @@ var CryptoJS = require("crypto-js");
 
 var DEFAULT_WORDLIST = require("./wordlists/en.json");
 
-function mnemonicToSeed(mnemonic) {
+function mnemonicToSeed(mnemonic, numIterations) {
   var salt = CryptoJS.lib.WordArray.random(128 / 8);
   var key256Bits = CryptoJS.PBKDF2(mnemonic, salt, {
     keySize: 256 / 32,
-    iterations: 1000
+    iterations: numIterations
   });
   return key256Bits;
 }
 
-function mnemonicToSeedHex(mnemonic, password) {
-  var seed = mnemonicToSeed(mnemonic, password);
+function mnemonicToSeedHex(mnemonic, numIterations) {
+  var seed = mnemonicToSeed(mnemonic, numIterations);
   return seed.toString("hex");
 }
 
