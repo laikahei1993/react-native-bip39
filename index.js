@@ -1,7 +1,7 @@
 var unorm = require("unorm");
 var assert = require("assert");
 var createHash = require("create-hash");
-var pbkdf2 = require("pbkdf2");
+var pbkdf2 = require("react-native-pbkdf2");
 var randomBytes = require("react-native-randombytes").randomBytes;
 
 var DEFAULT_WORDLIST = require("./wordlists/en.json");
