@@ -6,12 +6,17 @@ var randomBytes = require("react-native-randombytes").randomBytes;
 
 var DEFAULT_WORDLIST = require("./wordlists/en.json");
 
-async function mnemonicToSeed(mnemonic, password) {
-  return Aes.pbkdf2(mnemonic, salt(password));
+function mnemonicToSeed(mnemonic) {
+  var salt = CryptoJS.lib.WordArray.random(128 / 8);
+  var key256Bits = CryptoJS.PBKDF2(mnemonic, salt, {
+    keySize: 256 / 32,
+    iterations: 1000
+  });
+  return key256Bits;
 }
 
-async function mnemonicToSeedHex(mnemonic, password) {
-  var seed = await mnemonicToSeed(mnemonic, password);
+function mnemonicToSeedHex(mnemonic, password) {
+  var seed = mnemonicToSeed(mnemonic, password);
   return seed.toString("hex");
 }
 
