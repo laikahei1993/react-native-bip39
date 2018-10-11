@@ -4,8 +4,7 @@
   "description": "ReactNative-ready Bitcoin BIP39: Mnemonic code for generating deterministic keys",
   "main": "index.js",
   "scripts": {
-    "standard": "standard",
-    "postinstall": "node_modules/.bin/rn-nodeify --install crypto --hack"
+    "standard": "standard"
   },
   "author": "Alberto Dallaporta",
   "contributors": [],
@@ -25,14 +24,7 @@
   "devDependencies": {
     "nyc": "^8.3.0",
     "proxyquire": "^1.7.10",
-    "rn-nodeify": "^10.0.0",
     "standard": "*",
     "tape": "^4.6.2"
-  },
-  "react-native": {
-    "crypto": "react-native-crypto"
-  },
-  "browser": {
-    "crypto": "react-native-crypto"
   }
 }
