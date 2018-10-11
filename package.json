@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "standard": "standard",
-    "postinstall": "rn-nodeify --install crypto --hack"
+    "postinstall": "node_modules/.bin/rn-nodeify --install crypto --hack"
   },
   "author": "Alberto Dallaporta",
   "contributors": [],
