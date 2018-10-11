@@ -1,7 +1,7 @@
 var unorm = require("unorm");
 var assert = require("assert");
 var createHash = require("create-hash");
-var pbkdf2 = require("react-native-crypto").pbkdf2Sync;
+var pbkdf2 = require("pbkdf2");
 var randomBytes = require("react-native-randombytes").randomBytes;
 
 var DEFAULT_WORDLIST = require("./wordlists/en.json");
@@ -10,7 +10,7 @@ function mnemonicToSeed(mnemonic, password) {
   var mnemonicBuffer = new Buffer(mnemonic, "utf8");
   var saltBuffer = new Buffer(salt(password), "utf8");
 
-  return pbkdf2(mnemonicBuffer, saltBuffer, 2048, 64, "sha512");
+  return pbkdf2.pbkdf2Sync(mnemonicBuffer, saltBuffer, 2048, 64, "sha512");
 }
 
 function mnemonicToSeedHex(mnemonic, password) {
