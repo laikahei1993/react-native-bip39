@@ -1,6 +1,5 @@
 var unorm = require("unorm");
 var assert = require("assert");
-var Aes = require("react-native-aes-crypto").default;
 var createHash = require("create-hash");
 var randomBytes = require("react-native-randombytes").randomBytes;
 
