@@ -16,7 +16,7 @@
   "dependencies": {
     "assert": "^1.4.1",
     "create-hash": "git+https://github.com/crypto-browserify/createHash.git",
-    "crypto-js": "^3.1.9-1",
+    "pbkdf2": "git+https://github.com/crypto-browserify/pbkdf2.git",
     "react-native-randombytes": "^2.2.0",
     "unorm": "^1.3.3"
   },

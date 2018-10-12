@@ -1,25 +1,27 @@
 var unorm = require("unorm");
 var assert = require("assert");
 var createHash = require("create-hash");
+var pbkdf2 = require("pbkdf2");
 var randomBytes = require("react-native-randombytes").randomBytes;
-var CryptoJS = require("crypto-js");
 
 var DEFAULT_WORDLIST = require("./wordlists/en.json");
 
 function mnemonicToSeed(mnemonic) {
   var mnemonicNormalized = normalizeString(mnemonic);
   var salt = "mnemonic";
-  var key512Bits = CryptoJS.PBKDF2(mnemonicNormalized, salt, {
-    hasher: CryptoJS.algo.SHA512,
-    keySize: 512 / 32,
-    iterations: 2048
-  });
-  return key512Bits;
+  var derivedKey = pbkdf2.pbkdf2Sync(
+    mnemonicNormalized,
+    salt,
+    2048,
+    512,
+    "sha512"
+  );
+  return derivedKey;
 }
 
 function mnemonicToSeedHex(mnemonic) {
   var seed = mnemonicToSeed(mnemonic);
-  return seed.toString(CryptoJS.enc.Hex);
+  return seed.toString("hex");
 }
 
 function mnemonicToEntropy(mnemonic, wordlist) {
