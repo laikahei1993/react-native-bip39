@@ -13,7 +13,7 @@ function mnemonicToSeed(mnemonic) {
     mnemonicNormalized,
     salt,
     2048,
-    512,
+    512 / 8,
     "sha512"
   );
   return derivedKey;
