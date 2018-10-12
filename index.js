@@ -10,7 +10,7 @@ function mnemonicToSeed(mnemonic) {
   var mnemonicNormalized = normalizeString(mnemonic);
   var salt = "mnemonic";
   var key512Bits = CryptoJS.PBKDF2(mnemonicNormalized, salt, {
-    hasher: CryptoJS.algo.SHA512
+    hasher: CryptoJS.algo.SHA512,
     keySize: 512 / 32,
     iterations: 2048
   });
