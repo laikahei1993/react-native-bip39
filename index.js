@@ -6,18 +6,20 @@ var CryptoJS = require("crypto-js");
 
 var DEFAULT_WORDLIST = require("./wordlists/en.json");
 
-function mnemonicToSeed(mnemonic, numIterations) {
-  var salt = CryptoJS.lib.WordArray.random(128 / 8);
-  var key256Bits = CryptoJS.PBKDF2(mnemonic, salt, {
-    keySize: 256 / 32,
-    iterations: numIterations
+function mnemonicToSeed(mnemonic) {
+  var mnemonicNormalized = normalizeString(mnemonic);
+  var salt = "mnemonic";
+  var key512Bits = CryptoJS.PBKDF2(mnemonicNormalized, salt, {
+    hasher: CryptoJS.algo.SHA512
+    keySize: 512 / 32,
+    iterations: 2048
   });
-  return key256Bits;
+  return key512Bits;
 }
 
-function mnemonicToSeedHex(mnemonic, numIterations) {
-  var seed = mnemonicToSeed(mnemonic, numIterations);
-  return seed.toString("hex");
+function mnemonicToSeedHex(mnemonic) {
+  var seed = mnemonicToSeed(mnemonic);
+  return seed.toString(CryptoJS.enc.Hex);
 }
 
 function mnemonicToEntropy(mnemonic, wordlist) {
@@ -113,8 +115,8 @@ function checksumBits(entropyBuffer) {
   return bytesToBinary([].slice.call(hash)).slice(0, CS);
 }
 
-function salt(password) {
-  return "mnemonic" + (unorm.nfkd(password) || ""); // Use unorm until String.prototype.normalize gets better browser support
+function normalizeString(str) {
+  return unorm.nfkd(str);
 }
 
 //=========== helper methods from bitcoinjs-lib ========
